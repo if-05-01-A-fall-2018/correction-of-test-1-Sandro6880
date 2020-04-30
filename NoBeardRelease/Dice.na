@@ -1,0 +1,59 @@
+"Geben sie eine Zahl zwischen 1 und 6 ein:"
+inc 12
+#ausgeben:Geben sie eine Zahl zwischen 1 und 6 ein:
+
+lit 0
+lit 42
+lit 43
+out 2
+
+#einlesen von erster Zahl.
+la 0 32 # a addresse
+la 0 36         #Hinzugefügt für die Kontrolle der richtigen Eingabe
+in 0
+                # Sto wurde entfernt
+#ausgeben:Geben sie eine Zahl zwischen 1 und 6 ein:
+
+lit 0
+lit 42
+lit 43
+out 2
+
+#einlesen von zweiter Zahl.
+la 0 36 #b addresse
+la 0 40         #Hinzugefügt
+in 0
+                #Sto wie oben wurde entfernt
+
+lv 0 32 # value von a
+lv 0 36 # value von b
+rel 2   # schauen ob a = b
+tjmp .muliply_sums
+jmp .add_both         #Änderung von fjmp zu jmp. Grund: Nach mehreren Durchläufen würde fjmp nicht mehr zu der methode (add_both) springen
+                      #deshalb ein jmp weil es nur zu diesem jmp kommen kann falls tjmp funktioniert.
+
+.muliply_sums
+la 0 40 # c addresse laden
+lv 0 32
+lv 0 36
+add
+lit 2
+mul
+sto
+jmp .end
+
+.add_both
+la 0 40
+lv 0 32
+lv 0 36
+add
+sto
+jmp .end
+
+
+.end
+lv 0 40 #value von c
+lit 1                 #Änderung um eine Korrekte Ausgabe zu machen.
+out 0
+out 3
+halt
